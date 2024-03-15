@@ -46,8 +46,6 @@ list_w_2_weights = [];
 
 # обучение
 while (True):
-    print('iteration:', n_iter)
-    n_iter += 1
 
     for x_input, expected, j in zip(X, y, range(X.shape[0])):
         W_2_out, W_1_out = predict(x_input)
@@ -65,15 +63,14 @@ while (True):
         break
 
     # проверка наличия дубликатов в списке весов
-    if ((n_iter % check_iter) == 0):
-        break_out_flag = False
-        for item in list_w_2_weights:
-            if list_w_2_weights.count(item) > 1:
-                print('Повторение весов:')
-                break_out_flag = True
-                break
-        if break_out_flag:
+    break_out_flag = False
+    for item in list_w_2_weights:
+        if list_w_2_weights.count(item) > 1:
+            print('Повторение весов:')
+            break_out_flag = True
             break
+    if break_out_flag:
+        break
 
 W_2_out, W_1_out = predict(X)
 sum_errors = sum(W_2_out.reshape(-1) - y)
